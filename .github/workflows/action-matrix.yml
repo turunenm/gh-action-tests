@@ -51,7 +51,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]  #, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         browser: [chrome, edge, safari, firefox]
         python-version: [3.7, 3.8, 3.9, '3.10']
 
@@ -110,15 +110,16 @@ jobs:
       run: |
         python -c "import pyautogui; print(pyautogui.size())"
 
-#    - name: Test with pytest
+#    - name: Unit tests - Linux
 #      if: matrix.os == 'ubuntu-latest'
 #      run: |
 #        xvfb-run --auto-servernum pytest -v --junit-xml=unittests.xml --cov=QWeb
-#    - name: Test with pytest - Linux
+#    - name: Unit tests
 #      if: matrix.os != 'ubuntu-latest'
 #      run: |
 #        pytest -v --junit-xml=unittests.xml --cov=QWeb
-    - name: Acceptance tests ${{ matrix.browser }} - Linux
+
+    - name: Acceptance tests - Linux
       if: matrix.os == 'ubuntu-latest'
       run: |
         export DISPLAY=:88
