@@ -1,0 +1,14 @@
+# Testing dependencies
+Flask==2.0.2
+flake8
+mock==4.0.3
+pydocstyle==6.1.1
+pylint==2.12.2
+pytest
+pytest-pythonpath
+pytest-cov
+coverage
+duty == 0.7.0
+mypy
+types-setuptools
+types-requests

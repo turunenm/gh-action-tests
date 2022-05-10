@@ -1,0 +1,80 @@
+name: Uni And Acceptance Tests
+
+on:
+  workflow_run:
+    workflows: ["Static Analysis"]
+    types: 
+      - completed
+
+jobs:
+
+  unit_and_acceptance_tests:
+    name: ${{ runner.os }} py-${{ matrix.python-version }} ${{ matrix.browser }}
+    
+    strategy:
+      matrix:
+        os: [-latest]
+        browser: [chrome]
+        python-version: [3.9]
+        
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Check Static Analysis Status
+      if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+      uses: actions/github-script@v3
+      with:
+        script: |
+            core.setFailed('Static Analysis has failed!')
+        
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install RFW 3.2.2
+      if: matrix.python-version == '3.9'
+      run: |
+        python -m pip install robotframework==3.2.2
+#
+    - name: Install Linux dependencies
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get install matchbox scrot
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r requirements_test.txt
+    - name: Display Python version
+      run: |
+        python -c "import sys; print(sys.version)"
+    - name: Display Robot FW version
+      run: |
+        python -m pip show robotframework
+#
+    - name: Prepare Linux Execution
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        export DISPLAY=:88
+        Xvfb $DISPLAY -screen 0 1920x1080x24 & sleep 1
+        matchbox-window-manager -use_titlebar no &
+
+    - name: Display screen resolution
+      run: |
+        python -c "import pyautogui; print(pyautogui.size())"
+
+    - name: Test with pytest
+      run: |
+        pytest -v --junit-xml=unittests.xml --cov=QWeb
+
+    - name: Acceptance tests ${{ matrix.browser }}
+      run: |
+        python -m robot --exitonfailure -e jailed -e PROBLEM_IN_${{ runner.os }} -e PROBLEM_IN_${{ matrix.browser }} -v BROWSER:${{ matrix.browser }} -d output_${{ matrix.browser }} --name QWeb -b debug.txt --consolecolors ansi test/acceptance
+    - name: Archive Robot Framework Tests Report
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v1
+      with:
+        name: acceptance-tests-report-${{ matrix.browser }}-${{ runner.os }}-${{ matrix.python-version }}
+        path: ./output_${{ matrix.browser }}
