@@ -47,14 +47,14 @@ jobs:
     needs: static_analysis
 
     runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.flaky_webdriver }}
     
     strategy:
+      fail-fast: ${{ matrix.robust_webdriver }}
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         browser: [chrome, edge, firefox]
         python-version: [3.8, 3.9]
-        flaky_webdriver: [false]
+        robust_webdriver: [true]
         
         exclude:
           - os: ubuntu-latest
@@ -71,7 +71,7 @@ jobs:
             python-version: '3.10'
           - os: macos-latest
             browser: safari
-            flaky_webdriver: true
+            robust_webdriver: false
 
     steps:
     - uses: actions/checkout@v2
