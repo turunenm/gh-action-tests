@@ -3,7 +3,7 @@
 
 name: Test
 
-on: [commit]
+on: [push]
   #push:
   #  branches: [ master ]
   #  paths-ignore:
