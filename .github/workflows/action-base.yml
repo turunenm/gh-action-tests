@@ -1,4 +1,4 @@
-name: Uni And Acceptance Tests
+name: Unit And Acceptance Tests
 
 on:
   workflow_run:
