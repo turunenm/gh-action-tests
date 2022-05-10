@@ -6,7 +6,7 @@ Library    QWeb
 *** Test Cases ***
 All
     Log    Browser:${BROWSER}
-    Open Browser    ${BROWSER}    about:blank
+    Open Browser    about:blank    ${BROWSER}
     Log Screenshot
     Close All Browsers
 
