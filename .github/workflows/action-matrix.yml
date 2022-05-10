@@ -106,7 +106,7 @@ jobs:
       run: |
         python -m pip show robotframework
 #
-    - name: Prepare Linux Execution
+    - name: Display Linux screen resolution
       if: matrix.os == 'ubuntu-latest'
       run: |
         export DISPLAY=:88
@@ -114,7 +114,7 @@ jobs:
         matchbox-window-manager -use_titlebar no &
         python -c "import pyautogui; print(pyautogui.size())"
     - name: Display screen resolution
-      if matrix.os != 'ubuntu-latest'
+      if: matrix.os != 'ubuntu-latest'
       run: |
         python -c "import pyautogui; print(pyautogui.size())"
 
