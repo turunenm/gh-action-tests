@@ -55,7 +55,8 @@ jobs:
         browser: [chrome, edge, firefox]
         python-version: [3.8, 3.9]
         flaky_webdriver: [false]
-        - exclude:
+        
+        exclude:
           - os: ubuntu-latest
             browser: edge
           - os: windows-latest
@@ -63,7 +64,7 @@ jobs:
           - os: macos-latest
             browser: firefox
 
-        - include:
+        include:
           - os: ubuntu-latest
             python-version: 3.7
           - os: windows-latest
