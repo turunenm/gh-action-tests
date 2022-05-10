@@ -43,7 +43,7 @@ jobs:
         pylint Source
 
   unit_and_acceptance:
-    name: ${{ runner.os }} tests 
+    name: $RUNNER_OS tests 
     needs: static_analysis
 
     runs-on: ${{ matrix.os }}
