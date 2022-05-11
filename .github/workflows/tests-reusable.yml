@@ -21,9 +21,8 @@ on:
         type: string
 
 jobs:
-
-  unit_and_acceptance_tests:
-    name: py-${{ matrix.python-version }} ${{ matrix.browser }}
+  Tests:
+    name: ${{ matrix.python-version }} / ${{ matrix.browser }}
     
     strategy:
       matrix:
@@ -83,5 +82,5 @@ jobs:
       if: ${{ always() }}
       uses: actions/upload-artifact@v1
       with:
-        name: acceptance-tests-report-${{ matrix.browser }}-${{ runner.os }}-${{ matrix.python-version }}
+        name: TestReport-${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.browser }}
         path: ./output_${{ matrix.browser }}
