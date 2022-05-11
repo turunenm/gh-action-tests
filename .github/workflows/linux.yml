@@ -8,7 +8,7 @@ on:
 
 jobs:
   unit_and_acceptance_tests:
-    uses: ./.github/workflows/action-base
+    uses: ./.github/workflows/action-base.yml
     with:
       # arrays for matrices must be given as string for json parsing
       # https://github.community/t/reusable-workflow-with-strategy-matrix/205676
