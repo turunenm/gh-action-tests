@@ -7,11 +7,12 @@ on:
       - completed
 
 jobs:
-  unit_and_acceptance_tests:
-    uses: ./.github/workflows/action-base.yml
+  Linux:
+    uses: ./.github/workflows/tests-reusable.yml
     with:
       # arrays for matrices must be given as string for json parsing
       # https://github.community/t/reusable-workflow-with-strategy-matrix/205676
       os: '["ubuntu-latest"]'
       browser: '["chrome", "firefox"]'
       python-version: '["3.7", "3.8", "3.9"]'
+      rfw-322-python: "3.7"
