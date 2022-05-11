@@ -19,7 +19,7 @@ on:
 jobs:
 
   unit_and_acceptance_tests:
-    name: ${{ runner.os }} py-${{ matrix.python-version }} ${{ matrix.browser }}
+    name: ${{ matrix.os }} py-${{ matrix.python-version }} ${{ matrix.browser }}
     
     strategy:
       matrix:
