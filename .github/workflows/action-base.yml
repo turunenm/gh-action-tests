@@ -1,4 +1,4 @@
-name: ${{ runner.os }}
+name: Reusable
 
 on:
   workflow_call:
