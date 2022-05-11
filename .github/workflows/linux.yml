@@ -51,7 +51,7 @@ jobs:
       run: |
         python -m pip show robotframework
     - name: Display screen resolution
-      if: matrix.os != 'ubuntu-latest'
+#      if: matrix.os != 'ubuntu-latest'
       run: |
         python -c "import pyautogui; print(pyautogui.size())"
 
@@ -66,11 +66,11 @@ jobs:
 
     - name: Acceptance tests - Linux
       if: matrix.os == 'ubuntu-latest'
-      run: |
 #        export DISPLAY=:88
 #        Xvfb $DISPLAY -screen 0 1920x1080x24 & sleep 1
 #        matchbox-window-manager -use_titlebar no &
 #        python -c "import pyautogui; print(pyautogui.size())"
+      run: |
         python -m robot --exitonfailure -e jailed -e PROBLEM_IN_${{ runner.os }} -e PROBLEM_IN_${{ matrix.browser }} -v BROWSER:${{ matrix.browser }} -d output_${{ matrix.browser }} --name ${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.browser }} -b debug.txt --consolecolors ansi test/acceptance
     
     - name: Acceptance tests ${{ matrix.browser }}
