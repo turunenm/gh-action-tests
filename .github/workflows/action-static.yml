@@ -3,15 +3,15 @@
 
 name: Static Analysis
 
-on: [push]
-  #push:
-  #  branches: [ master ]
-  #  paths-ignore:
-  #    - '**.md'
-  #pull_request:
-  #  branches: [ master ]
-  #  paths-ignore:
-  #    - '**.md'
+on: 
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    branches: [ master ]
+    paths-ignore:
+      - '**.md'
   
 jobs:
   static_analysis:
