@@ -7,11 +7,11 @@ on:
         description: 'Stringified JSON object listing target os'
         required: true
         type: string
-      browsers:
+      browser:
         description: 'Stringified JSON object listing target browsers'
         required: true
         type: string
-      python-versions:
+      python-version:
         description: 'Stringified JSON object listing target Python versions'
         required: true
         type: string
@@ -24,8 +24,8 @@ jobs:
     strategy:
       matrix:
         os: ${{fromJson(inputs.os)}}
-        browser: ${{fromJson(inputs.browsers)}}
-        python-version: ${{fromJson(inputs.python-versions)}}
+        browser: ${{fromJson(inputs.browser)}}
+        python-version: ${{fromJson(inputs.python-version)}}
         
     runs-on: ${{ matrix.os }}
     env:
