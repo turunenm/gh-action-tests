@@ -6,7 +6,7 @@ Library    QWeb
 *** Test Cases ***
 All
     Log    Browser:${BROWSER}
-    Open Browser    about:blank    ${BROWSER}
+    Open Browser    https://www.duckduckgo.com    ${BROWSER}
     Log Screenshot
     Close All Browsers
 
