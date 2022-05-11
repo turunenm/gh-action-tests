@@ -19,7 +19,7 @@ jobs:
         
     runs-on: ${{ matrix.os }}
     env:
-      DISPLAY: 88
+      DISPLAY: :88
 
     steps:
     - uses: actions/checkout@v2
