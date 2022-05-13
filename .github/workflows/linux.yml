@@ -1,10 +1,6 @@
 name: Linux
 
-on:
-  workflow_run:
-    workflows: ["Static Analysis"]
-    types: 
-      - completed
+on: [workflow_call]
 
 jobs:
   Linux:
@@ -16,4 +12,3 @@ jobs:
       browser: '["chrome", "firefox"]'
       python-version: '["3.7", "3.8", "3.9"]'
       rfw-322-python: "3.7"
-      

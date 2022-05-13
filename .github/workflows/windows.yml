@@ -1,10 +1,6 @@
 name: Windows
 
-on:
-  workflow_run:
-    workflows: ["Static Analysis"]
-    types: 
-      - completed
+on: [workflow_call]
 
 jobs:
   Windows:
