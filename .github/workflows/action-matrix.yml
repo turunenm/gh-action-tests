@@ -37,7 +37,7 @@ on:
 
 jobs:
   StaticAnalysis:
-    if: ${{ github.event.inputs.StaticAnalysis == 'true' or github.event.inputs.StaticAnalysis == 'null'}}
+    if: ${{ github.event.inputs.StaticAnalysis == 'true' || github.event.inputs.StaticAnalysis == 'null'}}
     name: Static Analysis
 
     runs-on: ubuntu-latest
@@ -66,7 +66,7 @@ jobs:
         pylint Source
 
   Linux:
-    if: ${{ github.event.inputs.Linux == 'true' or github.event.inputs.Linux == 'null'}}
+    if: ${{ github.event.inputs.Linux == 'true' || github.event.inputs.Linux == 'null'}}
     needs: StaticAnalysis
     uses: ./.github/workflows/tests-reusable.yml
     with:
@@ -78,7 +78,7 @@ jobs:
       rfw-322-python: "3.7"
 
   Windows:
-    if: ${{ github.event.inputs.Windows == 'true' or github.event.inputs.Windows == 'null'}}
+    if: ${{ github.event.inputs.Windows == 'true' || github.event.inputs.Windows == 'null'}}
     needs: StaticAnalysis
     uses: ./.github/workflows/tests-reusable.yml
     with:
@@ -91,7 +91,7 @@ jobs:
       additional-rfw-parameters: "-e FLASK"
 
   MacOS:
-    if: ${{ github.event.inputs.MacOS == 'true' or github.event.inputs.MacOS == 'null'}}
+    if: ${{ github.event.inputs.MacOS == 'true' || github.event.inputs.MacOS == 'null'}}
     needs: StaticAnalysis
     uses: ./.github/workflows/tests-reusable.yml
     with:
