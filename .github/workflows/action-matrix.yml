@@ -41,9 +41,13 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    steps:      
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
+    steps:
+    - name: Checkout
+      if: ${{ github.event.inputs.StaticAnalysis == 'true' || github.event.inputs.StaticAnalysis == null }}
+      uses: actions/checkout@v2
+    - name: Set up Python
+      if: ${{ github.event.inputs.StaticAnalysis == 'true' || github.event.inputs.StaticAnalysis == null }}
+      uses: actions/setup-python@v2
       with:
         python-version: 3.9
     - name: Install dependencies
