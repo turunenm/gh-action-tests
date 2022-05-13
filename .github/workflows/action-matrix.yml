@@ -12,6 +12,23 @@ on:
     branches: [ master, main ]
     paths-ignore:
       - '**.md'
+  workflow_dispatch:
+    inputs:
+      Linux:
+        description: Run Linux tests
+        type: boolean
+        required: false
+        default: false
+      Windows:
+        description: Run Windows tests
+        type: boolean
+        required: false
+        default: false
+      MacOS:
+        description: Run MacOS tests
+        type: boolean
+        required: false
+        default: false
 
 jobs:
   static_analysis:
@@ -44,12 +61,35 @@ jobs:
 
   Linux:
     needs: static_analysis
-    uses: ./.github/workflows/linux.yml
+    uses: ./.github/workflows/tests-reusable.yml
+    with:
+      # arrays for matrices must be given as string for json parsing
+      # https://github.community/t/reusable-workflow-with-strategy-matrix/205676
+      os: '["ubuntu-latest"]'
+      browser: '["chrome", "firefox"]'
+      python-version: '["3.7", "3.8", "3.9"]'
+      rfw-322-python: "3.7"
 
   Windows:
     needs: static_analysis
-    uses: ./.github/workflows/windows.yml
+    uses: ./.github/workflows/tests-reusable.yml
+    with:
+      # arrays for matrices must be given as string for json parsing
+      # https://github.community/t/reusable-workflow-with-strategy-matrix/205676
+      os: '["windows-latest"]'
+      browser: '["chrome", "edge", "firefox"]'
+      python-version: '["3.9", "3.10"]'
+      rfw-322-python: "3.9"
+      additional-rfw-parameters: "-e FLASK"
 
   MacOS:
     needs: static_analysis
-    uses: ./.github/workflows/macos.yml
+    uses: ./.github/workflows/tests-reusable.yml
+    with:
+      # arrays for matrices must be given as string for json parsing
+      # https://github.community/t/reusable-workflow-with-strategy-matrix/205676
+      os: '["macos-latest"]'
+      browser: '["chrome", "edge", "safari"]'
+      python-version: '["3.8", "3.9"]'
+      rfw-322-python: "3.8"
+      additional-rfw-parameters: "-e RESOLUTION_DEPENDENCY -e FLASK"
