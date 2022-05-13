@@ -63,6 +63,7 @@ jobs:
       browser: '["chrome", "edge", "firefox"]'
       python-version: '["3.9", "3.10"]'
       rfw-322-python: "3.9"
+      additional-rfw-parameters: "-e FLASK"
 
   MacOS:
     needs: static_analysis
@@ -74,3 +75,4 @@ jobs:
       browser: '["chrome", "edge", "safari"]'
       python-version: '["3.8", "3.9"]'
       rfw-322-python: "3.8"
+      additional-rfw-parameters: "-e RESOLUTION_DEPENDENCY -e FLASK"

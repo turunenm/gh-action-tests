@@ -1,12 +1,13 @@
 *** Settings ***
 Library    QWeb
-Library    QWeb
-Library    QWeb
 
+*** Variables ***
+${BROWSER}    chrome
 *** Test Cases ***
 All
     Log    Browser:${BROWSER}
     Open Browser    https://www.duckduckgo.com    ${BROWSER}
+    VerifyElementText  being tracked  being tracked
     Log Screenshot
     Close All Browsers
 

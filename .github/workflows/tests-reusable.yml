@@ -19,6 +19,11 @@ on:
         description: Python version which will be used with RFW 3.2.2
         required: true
         type: string
+      additional-rfw-parameters:
+        description: Execution parameters which will be added to RFW execution
+        required: false
+        default: ""
+        type: string
 
 jobs:
   Tests:
@@ -76,7 +81,7 @@ jobs:
 
     - name: Acceptance tests
       run: |
-        python -m robot --exitonfailure -e jailed -e PROBLEM_IN_${{ runner.os }} -e PROBLEM_IN_${{ matrix.browser }} -v BROWSER:${{ matrix.browser }} -d output_${{ matrix.browser }} --name ${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.browser }} -b debug.txt --consolecolors ansi test/acceptance
+        python -m robot --exitonfailure ${{ inputs.additional-rfw-parameters }} -e jailed -e PROBLEM_IN_${{ runner.os }} -e PROBLEM_IN_${{ matrix.browser }} -v BROWSER:${{ matrix.browser }} -d output_${{ matrix.browser }} --name ${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.browser }} -b debug.txt --consolecolors ansi test/acceptance
     
     - name: Archive Robot Framework Tests Report
       if: ${{ always() }}
