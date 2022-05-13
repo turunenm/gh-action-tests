@@ -37,6 +37,7 @@ jobs:
         
     runs-on: ${{ matrix.os }}
     env:
+      # Used in Linux tests for windowing
       DISPLAY: :88
 
     steps:
