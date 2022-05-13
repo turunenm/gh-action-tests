@@ -33,3 +33,11 @@ Only Linux
 Only Windows
     [Tags]  PROBLEM_IN_MAC  PROBLEM_IN_LINUX
     Log    Should only run on Windows
+
+Resolution Dependency
+    [Tags]    RESOLUTION_DEPENDENCY
+    Log    Should run on Linux and Windows
+
+Flask
+    [Tags]    Flask
+    Log    Should run on Linux
