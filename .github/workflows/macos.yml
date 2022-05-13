@@ -16,3 +16,5 @@ jobs:
       browser: '["chrome", "edge", "safari"]'
       python-version: '["3.8", "3.9"]'
       rfw-322-python: "3.8"
+      additional-rfw-parameters: "-e RESOLUTION_DEPENDENCY -e FLASK"
+      
