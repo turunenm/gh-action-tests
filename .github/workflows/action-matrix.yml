@@ -37,25 +37,27 @@ on:
 
 jobs:
   StaticAnalysis:
-    if: ${{ github.event.inputs.StaticAnalysis == 'true' || github.event.inputs.StaticAnalysis == 'null'}}
     name: Static Analysis
 
     runs-on: ubuntu-latest
 
-    steps:
+    steps:      
     - uses: actions/checkout@v2
     - uses: actions/setup-python@v2
       with:
         python-version: 3.9
     - name: Install dependencies
+      if: ${{ github.event.inputs.StaticAnalysis == 'true' || github.event.inputs.StaticAnalysis == null }}
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install -r requirements_test.txt
     - name: Typecheck with mypy
+      if: ${{ github.event.inputs.StaticAnalysis == 'true' || github.event.inputs.StaticAnalysis == null }}
       run: |
         mypy --show-error-codes Source
     - name: Lint with flake8
+      if: ${{ github.event.inputs.StaticAnalysis == 'true' || github.event.inputs.StaticAnalysis == null }}
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
@@ -66,7 +68,7 @@ jobs:
         pylint Source
 
   Linux:
-    if: ${{ github.event.inputs.Linux == 'true' || github.event.inputs.Linux == 'null'}}
+    if: ${{ github.event.inputs.Linux == 'true' || github.event.inputs.Linux == null }}
     needs: StaticAnalysis
     uses: ./.github/workflows/tests-reusable.yml
     with:
@@ -78,7 +80,7 @@ jobs:
       rfw-322-python: "3.7"
 
   Windows:
-    if: ${{ github.event.inputs.Windows == 'true' || github.event.inputs.Windows == 'null'}}
+    if: ${{ github.event.inputs.Windows == 'true' || github.event.inputs.Windows == null}}
     needs: StaticAnalysis
     uses: ./.github/workflows/tests-reusable.yml
     with:
@@ -91,7 +93,7 @@ jobs:
       additional-rfw-parameters: "-e FLASK"
 
   MacOS:
-    if: ${{ github.event.inputs.MacOS == 'true' || github.event.inputs.MacOS == 'null'}}
+    if: ${{ github.event.inputs.MacOS == 'true' || github.event.inputs.MacOS == null }}
     needs: StaticAnalysis
     uses: ./.github/workflows/tests-reusable.yml
     with:
