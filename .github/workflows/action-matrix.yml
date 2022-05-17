@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Quality Assurance
+name: Static Analysis
 
 on: 
   push:
@@ -75,40 +75,40 @@ jobs:
       run: |
         pylint Source
 
-  Linux:
-    if: ${{ github.event.inputs.Linux == 'true' || github.event.inputs.Linux == null }}
-    needs: StaticAnalysis
-    uses: ./.github/workflows/tests-reusable.yml
-    with:
-      # arrays for matrices must be given as string for json parsing
-      # https://github.community/t/reusable-workflow-with-strategy-matrix/205676
-      os: '["ubuntu-latest"]'
-      browser: '["chrome", "firefox"]'
-      python-version: '["3.7", "3.8", "3.9"]'
-      rfw-322-python: "3.7"
+#  Linux:
+#    if: ${{ github.event.inputs.Linux == 'true' || github.event.inputs.Linux == null }}
+#    needs: StaticAnalysis
+#    uses: ./.github/workflows/tests-reusable.yml
+#    with:
+#      # arrays for matrices must be given as string for json parsing
+#      # https://github.community/t/reusable-workflow-with-strategy-matrix/205676
+#      os: '["ubuntu-latest"]'
+#      browser: '["chrome", "firefox"]'
+#      python-version: '["3.7", "3.8", "3.9"]'
+#      rfw-322-python: "3.7"
 
-  Windows:
-    if: ${{ github.event.inputs.Windows == 'true' || github.event.inputs.Windows == null}}
-    needs: StaticAnalysis
-    uses: ./.github/workflows/tests-reusable.yml
-    with:
-      # arrays for matrices must be given as string for json parsing
-      # https://github.community/t/reusable-workflow-with-strategy-matrix/205676
-      os: '["windows-latest"]'
-      browser: '["chrome", "edge", "firefox"]'
-      python-version: '["3.9", "3.10"]'
-      rfw-322-python: "3.9"
-      additional-rfw-parameters: "-e FLASK"
+#  Windows:
+#    if: ${{ github.event.inputs.Windows == 'true' || github.event.inputs.Windows == null}}
+#    needs: StaticAnalysis
+#    uses: ./.github/workflows/tests-reusable.yml
+#    with:
+#      # arrays for matrices must be given as string for json parsing
+#      # https://github.community/t/reusable-workflow-with-strategy-matrix/205676
+#      os: '["windows-latest"]'
+#      browser: '["chrome", "edge", "firefox"]'
+#      python-version: '["3.9", "3.10"]'
+#      rfw-322-python: "3.9"
+#      additional-rfw-parameters: "-e FLASK"
 
-  MacOS:
-    if: ${{ github.event.inputs.MacOS == 'true' || github.event.inputs.MacOS == null }}
-    needs: StaticAnalysis
-    uses: ./.github/workflows/tests-reusable.yml
-    with:
-      # arrays for matrices must be given as string for json parsing
-      # https://github.community/t/reusable-workflow-with-strategy-matrix/205676
-      os: '["macos-latest"]'
-      browser: '["chrome", "edge", "safari"]'
-      python-version: '["3.8", "3.9"]'
-      rfw-322-python: "3.8"
-      additional-rfw-parameters: "-e RESOLUTION_DEPENDENCY -e FLASK"
+#  MacOS:
+#    if: ${{ github.event.inputs.MacOS == 'true' || github.event.inputs.MacOS == null }}
+#    needs: StaticAnalysis
+#    uses: ./.github/workflows/tests-reusable.yml
+#    with:
+#      # arrays for matrices must be given as string for json parsing
+#      # https://github.community/t/reusable-workflow-with-strategy-matrix/205676
+#      os: '["macos-latest"]'
+#      browser: '["chrome", "edge", "safari"]'
+#      python-version: '["3.8", "3.9"]'
+#      rfw-322-python: "3.8"
+#      additional-rfw-parameters: "-e RESOLUTION_DEPENDENCY -e FLASK"

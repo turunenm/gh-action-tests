@@ -5,7 +5,9 @@ testing github actions
 ![License][license-badge]
 ![Python versions][python-versions-badge]
 ![Release][pypi-badge]
+![Linux Acceptance][linux_ci_badge]
 ![Windows Acceptance][win_ci_badge]
+![MacOS Acceptance][macos_ci_badge]
 
 ---
 
@@ -13,6 +15,8 @@ Dummy content
 
 ---
 [license-badge]: https://img.shields.io/github/license/qentinelqi/qweb
-[win_ci_badge]: https://github.com/qentinelqi/qweb/actions/workflows/quality_assurance.yml/badge.svg
+[linux_ci_badge]: https://github.com/qentinelqi/qweb/actions/workflows/linux.yml/badge.svg
+[win_ci_badge]: https://github.com/qentinelqi/qweb/actions/workflows/windows.yml/badge.svg
+[macos_ci_badge]: https://github.com/qentinelqi/qweb/actions/workflows/macos.yml/badge.svg
 [python-versions-badge]: https://img.shields.io/pypi/pyversions/QWeb
 [pypi-badge]: https://img.shields.io/pypi/v/QWeb?color=green
