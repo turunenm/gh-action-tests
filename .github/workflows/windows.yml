@@ -1,5 +1,3 @@
-name: Windows
-
 on:
   workflow_run:
     workflows: ["Static Analysis"]
