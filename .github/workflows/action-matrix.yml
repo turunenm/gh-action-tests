@@ -62,7 +62,7 @@ jobs:
     - name: Typecheck with mypy
       if: ${{ github.event.inputs.StaticAnalysis == 'true' || github.event.inputs.StaticAnalysis == null }}
       run: |
-        mypy --show-error-codes Source
+        mypy --show-error-codes QWeb
     - name: Lint with flake8
       if: ${{ github.event.inputs.StaticAnalysis == 'true' || github.event.inputs.StaticAnalysis == null }}
       run: |
@@ -73,7 +73,7 @@ jobs:
     - name: Lint with pylint
       if: ${{ github.event.inputs.StaticAnalysis == 'true' || github.event.inputs.StaticAnalysis == null }}
       run: |
-        pylint Source
+        pylint QWeb
 
   Linux:
     if: ${{ github.event.inputs.Linux == 'true' || github.event.inputs.Linux == null }}
