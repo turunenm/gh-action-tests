@@ -61,8 +61,9 @@ jobs:
         pip install -r requirements_test.txt
     - name: Typecheck with mypy
       if: ${{ github.event.inputs.StaticAnalysis == 'true' || github.event.inputs.StaticAnalysis == null }}
+# this needs to changed in QWeb repo
       run: |
-        mypy --show-error-codes QWeb
+        mypy --show-error-codes Source
     - name: Lint with flake8
       if: ${{ github.event.inputs.StaticAnalysis == 'true' || github.event.inputs.StaticAnalysis == null }}
       run: |
@@ -72,8 +73,9 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Lint with pylint
       if: ${{ github.event.inputs.StaticAnalysis == 'true' || github.event.inputs.StaticAnalysis == null }}
+# this needs to changed in QWeb repo
       run: |
-        pylint QWeb
+        pylint Source
 
   Linux:
     if: ${{ github.event.inputs.Linux == 'true' || github.event.inputs.Linux == null }}
